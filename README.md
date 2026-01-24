@@ -3,9 +3,11 @@
 - 请勿转发
 ## 本周关键词：线性模型
 The  linear model is given by
+
 $$
 y_i=\beta_0+\beta_1x_i+\epsilon_i
 $$
+
 ## 最小二乘法
 >这里以一元线性模型为例
 
