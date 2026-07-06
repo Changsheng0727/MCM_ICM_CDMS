@@ -2,13 +2,13 @@
 
 ## 课程定位
 
-这一讲对应 `m_Sai_04_1.mlx` 中的线性规划部分，训练优化建模基本功。
+这一讲主入口是 [lesson-10-linear-programming.ipynb](../../../notebooks/lesson-10-linear-programming.ipynb)，训练优化建模基本功。早期 `m_Sai_04_1.mlx` 仅作为迁移参考保留。
 
 ## 课堂目标
 
 - 能从实际问题中定义决策变量
 - 能写出目标函数和线性约束
-- 能用 `linprog` 求解
+- 能用 `scipy.optimize.linprog` 求解
 - 能解释最优解和可行域
 
 ## 核心概念
@@ -24,7 +24,7 @@
 使用生产计划问题演示：
 
 - 参数整理
-- `linprog` 求解
+- `scipy.optimize.linprog` 求解
 - 二维可行域可视化
 - 最优解解释
 
@@ -37,7 +37,7 @@
 提交：
 
 - 模型三要素
-- MATLAB 求解代码
+- Python/Jupyter 求解代码
 - 最优解表
 - 可行域或结果图
 
@@ -52,5 +52,4 @@
 
 ## 后续建设建议
 
-把 `m_Sai_04_1.mlx` 中 LP 案例拆成 `lesson10_linear_programming.m`。
-
+把 Notebook 中 LP 案例沉淀为 `lesson10_linear_programming.py`。

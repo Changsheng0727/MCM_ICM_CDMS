@@ -7,7 +7,7 @@
 ## 课堂目标
 
 - 理解整数变量和 0-1 变量
-- 能用 `intlinprog` 求解基础问题
+- 能用枚举、小规模搜索或 MILP 工具求解基础问题
 - 理解多目标优化的加权求和思想
 - 能比较不同权重下的解
 
@@ -51,5 +51,4 @@
 
 ## 后续建设建议
 
-从 `m_Sai_04_1.mlx` 中拆分整数规划、多目标优化独立小节。
-
+持续打磨 [lesson-11-integer-multiobjective.ipynb](../../../notebooks/lesson-11-integer-multiobjective.ipynb)，并把整数规划、多目标优化案例沉淀为独立 Python 脚本。

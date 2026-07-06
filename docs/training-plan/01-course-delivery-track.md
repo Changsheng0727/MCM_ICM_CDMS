@@ -17,7 +17,7 @@
 | 课前目标 | 学员上课前需要知道什么 |
 | 课堂目标 | 这节课结束后必须能做什么 |
 | 核心概念 | 本讲最重要的 3-5 个概念 |
-| 代码演示 | 课堂必须跑通的 MATLAB 片段 |
+| 代码演示 | 课堂必须跑通的 Python/Jupyter 片段 |
 | 实战练习 | 学员当场完成的小任务 |
 | 课后作业 | 可独立完成的交付件 |
 | 验收标准 | 如何判断学员真的会了 |
@@ -26,17 +26,18 @@
 
 完整 18 讲课程设计入口：[lessons/README.md](lessons/README.md)。
 
-### 第 2-4 讲：MATLAB 入门、数据处理与 EDA
+### 第 2-4 讲：Python 数据处理与 EDA
 
 对应文件：
 
-- `m_Sai_02_1.mlx`
-- `m_Sai_02_2.mlx`
+- [notebooks/lesson-02-python-data-structures.ipynb](../../notebooks/lesson-02-python-data-structures.ipynb)
+- [notebooks/lesson-03-data-cleaning-visualization.ipynb](../../notebooks/lesson-03-data-cleaning-visualization.ipynb)
+- [notebooks/lesson-04-eda-visual-storytelling.ipynb](../../notebooks/lesson-04-eda-visual-storytelling.ipynb)
 
 重点交付：
 
-- 学员能理解 MATLAB 常见数据类型
-- 学员能用 `table` 组织混合数据
+- 学员能理解 Python 常见数据类型
+- 学员能用 `pandas.DataFrame` 组织混合数据
 - 学员能处理缺失值、筛选数据、保存清洗结果
 - 学员能画出直方图、箱线图、散点图和基础统计图
 
@@ -48,7 +49,8 @@
 
 对应文件：
 
-- `m_Sai_03_1.mlx`
+- [notebooks/lesson-05-regression-diagnostics.ipynb](../../notebooks/lesson-05-regression-diagnostics.ipynb)
+- [notebooks/lesson-06-clustering-pca.ipynb](../../notebooks/lesson-06-clustering-pca.ipynb)
 
 重点交付：
 
@@ -65,13 +67,14 @@
 
 对应文件：
 
-- `m_Sai_04_1.mlx`
+- [notebooks/lesson-10-linear-programming.ipynb](../../notebooks/lesson-10-linear-programming.ipynb)
+- [notebooks/lesson-11-integer-multiobjective.ipynb](../../notebooks/lesson-11-integer-multiobjective.ipynb)
 
 重点交付：
 
 - 学员能把实际问题写成决策变量、目标函数、约束条件
-- 学员能用 `linprog` 求解线性规划
-- 学员能用 `intlinprog` 理解整数规划和 0-1 规划
+- 学员能用 `scipy.optimize.linprog` 求解线性规划
+- 学员能通过枚举、小规模搜索或 MILP 工具理解整数规划和 0-1 规划
 - 学员能理解非线性规划和多目标优化的基本场景
 
 课后作业：

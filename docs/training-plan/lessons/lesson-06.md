@@ -2,7 +2,7 @@
 
 ## 课程定位
 
-这一讲对应 `m_Sai_03_1.mlx` 中的聚类和 PCA 部分，目标是训练无监督分析能力。
+这一讲主入口是 [lesson-06-clustering-pca.ipynb](../../../notebooks/lesson-06-clustering-pca.ipynb)，目标是训练无监督分析能力。早期 `m_Sai_03_1.mlx` 仅作为迁移参考保留。
 
 ## 课堂目标
 
@@ -55,4 +55,3 @@
 ## 后续建设建议
 
 补充层次聚类作为扩展内容。
-

@@ -2,7 +2,7 @@
 
 ## 课程定位
 
-这一讲对应现有 `m_Sai_02_1.mlx`，目标是让学员跑通最小数据处理链。
+这一讲主入口是 [lesson-03-data-cleaning-visualization.ipynb](../../../notebooks/lesson-03-data-cleaning-visualization.ipynb)，目标是让学员跑通最小数据处理链。早期 `m_Sai_02_1.mlx` 仅作为迁移参考保留。
 
 ## 课堂目标
 
@@ -22,7 +22,7 @@
 
 ## 课堂演示
 
-基于 `m_Sai_02_1.mlx` 演示：
+基于 Notebook 演示：
 
 - 模拟糖尿病数据集
 - 导入和清洗数据
@@ -58,4 +58,3 @@
 ## 后续建设建议
 
 建立 `outputs/figures/` 和 `outputs/tables/`，让本讲结果自动保存。
-

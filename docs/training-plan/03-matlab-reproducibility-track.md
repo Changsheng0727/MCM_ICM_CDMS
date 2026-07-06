@@ -1,10 +1,10 @@
-# 03 MATLAB 代码与复现线
+# 03 Python/Jupyter 代码与复现线
 
 ## 这条线解决什么
 
-MATLAB 代码与复现线关注的是：课件代码能不能从教学演示变成比赛可复用资产。
+Python/Jupyter 代码与复现线关注的是：课件代码能不能从教学演示变成比赛可复用资产。
 
-Live Script 很适合讲课，但真正比赛时还需要更清晰的文件组织：
+Notebook 很适合讲课和演示，但真正比赛时还需要更清晰的文件组织：
 
 ```text
 raw data -> preprocessing -> model -> figures/tables -> result summary
@@ -12,14 +12,14 @@ raw data -> preprocessing -> model -> figures/tables -> result summary
 
 ## 当前仓库状态
 
-当前仓库主要由 `.mlx` 文件组成：
+当前仓库已经补齐 18 个 Python/Jupyter Notebook，早期 `.mlx` 文件作为迁移参考保留：
 
 - `m_Sai_02_1.mlx`
 - `m_Sai_02_2.mlx`
 - `m_Sai_03_1.mlx`
 - `m_Sai_04_1.mlx`
 
-建议保留 `.mlx` 作为课堂材料，同时逐步补充：
+建议以 `notebooks/` 为主入口，同时逐步补充：
 
 - `data/`：示例数据
 - `src/`：可复用脚本和函数
@@ -35,8 +35,8 @@ MCM_ICM_CDMS/
     processed/
   src/
     lesson02_data_processing/
-    lesson03_modeling/
-    lesson04_optimization/
+    lesson05_regression/
+    lesson10_optimization/
   outputs/
     figures/
     tables/
@@ -60,9 +60,9 @@ src/
 
 ### 文件命名
 
-- 课件：`m_Sai_02_1.mlx`
-- 脚本：`lesson02_data_cleaning.m`
-- 函数：`clean_missing_values.m`
+- 课件：`notebooks/lesson-02-python-data-structures.ipynb`
+- 脚本：`lesson02_data_cleaning.py`
+- 函数：`clean_missing_values.py`
 - 图表：`lesson03_regression_fit.png`
 - 表格：`lesson04_optimization_result.csv`
 
@@ -78,12 +78,12 @@ src/
 
 论文或讲义里出现的数值，必须能追溯到：
 
-- MATLAB 输出
+- Notebook 输出
 - 保存的表格
 - 保存的图
 - 或明确的计算公式
 
-## 第 2 讲代码复现要求
+## 第 2-4 讲代码复现要求
 
 最低要求：
 
@@ -100,7 +100,7 @@ src/
 - `outputs/figures/lesson02_boxplot.png`
 - `outputs/figures/lesson02_scatter.png`
 
-## 第 3 讲代码复现要求
+## 第 5-9 讲代码复现要求
 
 最低要求：
 
@@ -116,7 +116,7 @@ src/
 - `outputs/figures/lesson03_regression_fit.png`
 - `outputs/figures/lesson03_pca_clusters.png`
 
-## 第 4 讲代码复现要求
+## 第 10-14 讲代码复现要求
 
 最低要求：
 

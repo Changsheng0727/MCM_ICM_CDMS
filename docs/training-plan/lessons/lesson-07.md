@@ -52,5 +52,4 @@
 
 ## 后续建设建议
 
-新增一个 `lesson07_evaluation_models.mlx`，配套熵权法和 TOPSIS 函数。
-
+持续打磨 [lesson-07-evaluation-models.ipynb](../../../notebooks/lesson-07-evaluation-models.ipynb)，并把熵权法和 TOPSIS 封装为可复用 Python 函数。

@@ -2,7 +2,7 @@
 
 ## 这条线解决什么
 
-建模方法线关注的是：学员能不能把美赛问题转成合适的模型，而不是只会调用 MATLAB 函数。
+建模方法线关注的是：学员能不能把美赛问题转成合适的模型，而不是只会调用某个软件函数。
 
 核心判断链：
 
@@ -12,15 +12,18 @@
 
 ## 模型地图
 
-| 问题类型 | 推荐模型 | 当前课件支撑 |
+| 问题类型 | 推荐模型 | 当前 Notebook 支撑 |
 | --- | --- | --- |
-| 变量关系解释 | 线性回归、多元回归 | `m_Sai_03_1.mlx` |
-| 群体划分 | K-means、层次聚类 | `m_Sai_03_1.mlx` |
-| 指标压缩与可视化 | PCA | `m_Sai_03_1.mlx` |
-| 资源分配 | 线性规划 | `m_Sai_04_1.mlx` |
-| 离散选择 | 整数规划、0-1 规划 | `m_Sai_04_1.mlx` |
-| 非线性目标 | 非线性规划 | `m_Sai_04_1.mlx` |
-| 多目标权衡 | 多目标优化 | `m_Sai_04_1.mlx` |
+| 变量关系解释 | 线性回归、多元回归 | [lesson-05](../../notebooks/lesson-05-regression-diagnostics.ipynb) |
+| 群体划分 | K-means、层次聚类 | [lesson-06](../../notebooks/lesson-06-clustering-pca.ipynb) |
+| 指标压缩与可视化 | PCA | [lesson-06](../../notebooks/lesson-06-clustering-pca.ipynb) |
+| 综合评价 | 熵权法、TOPSIS | [lesson-07](../../notebooks/lesson-07-evaluation-models.ipynb) |
+| 预测 | 趋势预测、灰色预测、滚动预测 | [lesson-08](../../notebooks/lesson-08-forecasting-models.ipynb) |
+| 分类 | 逻辑回归、随机森林、指标评估 | [lesson-09](../../notebooks/lesson-09-classification-models.ipynb) |
+| 资源分配 | 线性规划 | [lesson-10](../../notebooks/lesson-10-linear-programming.ipynb) |
+| 离散选择 | 整数规划、0-1 规划 | [lesson-11](../../notebooks/lesson-11-integer-multiobjective.ipynb) |
+| 网络结构 | 最短路、最大流、中心性 | [lesson-12](../../notebooks/lesson-12-graph-network-models.ipynb) |
+| 不确定性 | 蒙特卡洛仿真、敏感性分析 | [lesson-13](../../notebooks/lesson-13-monte-carlo-simulation.ipynb)、[lesson-14](../../notebooks/lesson-14-sensitivity-robustness.ipynb) |
 
 在 18 讲体系中的位置见：[06-18-lesson-syllabus.md](06-18-lesson-syllabus.md)。
 
@@ -89,7 +92,7 @@
 
 最低练习：
 
-- 用 `linprog` 求解一个生产计划问题
+- 用 `scipy.optimize.linprog` 求解一个生产计划问题
 - 画出二维可行域
 - 说明最优解为什么合理
 
@@ -103,7 +106,7 @@
 
 最低练习：
 
-- 用 `intlinprog` 求解一个选择或分配问题
+- 用枚举、小规模搜索或 MILP 工具求解一个选择或分配问题
 - 说明整数约束带来的变化
 
 ## 后续建议补充模型

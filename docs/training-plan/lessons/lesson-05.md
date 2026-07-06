@@ -2,7 +2,7 @@
 
 ## 课程定位
 
-这一讲对应 `m_Sai_03_1.mlx` 中的回归部分，目标是让学员会建立并解释回归模型。
+这一讲主入口是 [lesson-05-regression-diagnostics.ipynb](../../../notebooks/lesson-05-regression-diagnostics.ipynb)，目标是让学员会建立并解释回归模型。早期 `m_Sai_03_1.mlx` 仅作为迁移参考保留。
 
 ## 课堂目标
 
@@ -51,5 +51,4 @@
 
 ## 后续建设建议
 
-将回归部分从 `m_Sai_03_1.mlx` 拆成独立脚本，并保存系数表。
-
+将 Notebook 中的回归流程沉淀为独立 Python 脚本，并保存系数表。
