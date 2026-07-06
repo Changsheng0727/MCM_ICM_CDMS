@@ -2,7 +2,7 @@
 
 > 返回：[项目 README](../README.md)
 
-本目录保存 18 讲课程体系对应的 Jupyter Notebook 示例代码。它们用于替代原 MATLAB 依赖，让培训项目可以基于 Python 继续推进。
+本目录保存 18 讲课程体系对应的 Jupyter Notebook 课件。每一讲都包含课件导学、资料链接、可运行示例、实战环节、课后挑战和验收清单，用于替代原 MATLAB 依赖，让培训项目可以基于 Python 继续推进。
 
 ## 运行方式
 
@@ -29,6 +29,12 @@ python tools/validate_notebooks.py
 ```text
 outputs/lesson-xx/
 ```
+
+课程化版本还会额外保存：
+
+- `lesson_resources.csv`：本讲参考资料和阅读抓手
+- `lesson_deliverables.csv`：本讲交付物清单
+- `lesson_checklist.csv`：课堂/课后验收清单
 
 ## 18 讲 Notebook 索引
 

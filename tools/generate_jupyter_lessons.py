@@ -38,12 +38,312 @@ print(f"Output directory: {OUTPUT_ROOT}")
 """
 
 
+LESSON_ENRICHMENT = {
+    "lesson-01": {
+        "scenario": "把一支三人队伍放进真实 MCM/ICM 时间压力中，先解决分工、节奏和交付物边界。",
+        "concepts": ["比赛规则与提交物", "角色分工", "任务看板", "可复现交付链"],
+        "resources": [
+            ("COMAP MCM/ICM 官方说明", "https://www.contest.comap.com/undergraduate/contests/mcm/instructions.php", "核对规则、摘要页、提交要求和时间节点。"),
+            ("COMAP MCM/ICM 赛事页", "https://www.comap.com/contests/mcm-icm", "理解竞赛强调的开放问题、团队协作和应用建模。"),
+            ("Jupyter Notebook 官方介绍", "https://jupyter-notebook.readthedocs.io/en/stable/notebook.html", "把 Notebook 当作代码、叙事、公式和结果输出合一的课件容器。"),
+        ],
+        "practice": ["选一个历年题目，用 10 分钟写出子问题输入、输出和最终交付物。", "按队长、数据手、建模手、编程手、论文手拆出职责，可一人兼多职。", "把所有交付物改写成可检查文件名。"],
+        "deliverables": ["team_roles.csv", "比赛工作流表", "队伍任务分工说明"],
+        "challenge": "用本讲表格为你们自己的培训项目建立一个 72 小时比赛看板。",
+        "checklist": ["是否能说清每个阶段的负责人", "是否能区分模型结果和论文表达", "是否列出最终提交前检查项"],
+    },
+    "lesson-02": {
+        "scenario": "比赛数据经常混合数值、类别、文本和队伍信息，本讲训练把杂乱信息整理成 DataFrame。",
+        "concepts": ["Series 与 DataFrame", "分类变量", "分组统计", "派生字段"],
+        "resources": [
+            ("pandas 表格数据入门", "https://pandas.pydata.org/docs/getting_started/intro_tutorials/01_table_oriented.html", "学习用 DataFrame 表达二维混合数据。"),
+            ("pandas groupby 用户指南", "https://pandas.pydata.org/docs/user_guide/groupby.html", "掌握 split-apply-combine 的分组统计思路。"),
+            ("Jupyter 文档", "https://docs.jupyter.org/", "理解 Notebook 的组织方式，方便把代码写成课件。"),
+        ],
+        "practice": ["建立一张队员能力表。", "新增 1 个综合评分字段。", "按队伍或角色输出分组摘要。"],
+        "deliverables": ["team_summary.csv", "成员数据 DataFrame", "分工建议表"],
+        "challenge": "把表格替换成你们真实队员数据，并给出建模/编程/写作角色建议。",
+        "checklist": ["字段类型是否正确", "是否至少包含 1 个 category 字段", "分组统计是否能支持分工结论"],
+    },
+    "lesson-03": {
+        "scenario": "附件数据通常带缺失值、异常值和量纲差异，本讲训练一条最小清洗与可视化链。",
+        "concepts": ["缺失值识别", "填补策略", "描述统计", "基础图表"],
+        "resources": [
+            ("pandas 缺失数据指南", "https://pandas.pydata.org/docs/user_guide/missing_data.html", "学习缺失值的表示、检测和填补。"),
+            ("pandas groupby 用户指南", "https://pandas.pydata.org/docs/user_guide/groupby.html", "用分组统计检查不同类别的数据质量。"),
+            ("Matplotlib pyplot 教程", "https://matplotlib.org/stable/tutorials/pyplot.html", "掌握直方图、散点图和基础图形输出。"),
+        ],
+        "practice": ["统计每列缺失数量。", "比较均值填补和中位数填补。", "输出 1 张分布图、1 张箱线图、1 张散点图。"],
+        "deliverables": ["raw_health_data.csv", "descriptive_summary.csv", "basic_visualization.png"],
+        "challenge": "给清洗步骤补一段 200 字数据质量说明，说明为什么选择该填补策略。",
+        "checklist": ["是否保存原始数据副本", "是否说明缺失处理方式", "图表标题和变量含义是否清楚"],
+    },
+    "lesson-04": {
+        "scenario": "EDA 不是画图堆叠，而是从图表发现可进入模型的假设。",
+        "concepts": ["相关矩阵", "散点模式", "图表解释", "建模假设"],
+        "resources": [
+            ("Matplotlib pyplot 教程", "https://matplotlib.org/stable/tutorials/pyplot.html", "复习常用绘图接口。"),
+            ("Matplotlib subplots 文档", "https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html", "学习多图布局，适合课件展示。"),
+            ("Matplotlib 示例库", "https://matplotlib.org/stable/gallery/index.html", "查找更专业的图表样式参考。"),
+        ],
+        "practice": ["找出最值得进入模型的两个变量关系。", "给每张图写一句观察和一句建模启发。", "删除一张对结论没有帮助的图。"],
+        "deliverables": ["eda_correlation.csv", "eda_story.png", "figure_interpretation.csv"],
+        "challenge": "把相关图和散点图改造成论文中可以直接使用的双栏图。",
+        "checklist": ["图表是否服务于问题", "解释是否避免因果过度推断", "是否能导出建模假设"],
+    },
+    "lesson-05": {
+        "scenario": "回归模型常用于解释变量关系，本讲强调系数、误差和残差诊断必须同时出现。",
+        "concepts": ["线性回归", "训练/测试划分", "MAE 与 R2", "残差诊断"],
+        "resources": [
+            ("scikit-learn LinearRegression", "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html", "查看线性回归模型接口。"),
+            ("scikit-learn 模型评估", "https://scikit-learn.org/stable/modules/model_evaluation.html", "理解回归和分类指标的选择。"),
+            ("scikit-learn 用户指南", "https://scikit-learn.org/stable/user_guide.html", "定位监督学习、聚类和降维等模块。"),
+        ],
+        "practice": ["替换 1 个自变量并观察 R2 变化。", "判断残差图是否出现系统性模式。", "写一段回归结果解释。"],
+        "deliverables": ["regression_coefficients.csv", "regression_metrics.csv", "regression_diagnostics.png"],
+        "challenge": "增加一个非线性特征或交互项，比较模型是否真正改善。",
+        "checklist": ["是否明确因变量和自变量", "是否保存系数表", "是否用残差说明模型局限"],
+    },
+    "lesson-06": {
+        "scenario": "无监督模型用于画像、分群和结构发现，本讲训练聚类结果能不能解释。",
+        "concepts": ["标准化", "K-means", "肘部法", "PCA 可视化"],
+        "resources": [
+            ("scikit-learn K-means", "https://scikit-learn.org/stable/modules/clustering.html#k-means", "理解 K-means 的适用场景和参数。"),
+            ("scikit-learn PCA", "https://scikit-learn.org/stable/modules/decomposition.html#pca", "学习主成分降维的解释方式。"),
+            ("scikit-learn 用户指南", "https://scikit-learn.org/stable/user_guide.html", "把聚类、降维和预处理放进同一建模地图。"),
+        ],
+        "practice": ["比较 k=2、3、4 的聚类画像。", "解释标准化前后结果为什么会变化。", "给每一类起一个业务标签。"],
+        "deliverables": ["k_selection.csv", "cluster_profile.csv", "clustering_pca.png"],
+        "challenge": "把 PCA 图中的聚类结果写成 150 字论文式描述。",
+        "checklist": ["是否标准化", "是否说明 K 值选择依据", "聚类画像是否能转成实际含义"],
+    },
+    "lesson-07": {
+        "scenario": "评价类题目要把多指标压成可解释排序，本讲训练熵权法和 TOPSIS 的完整链路。",
+        "concepts": ["指标方向", "标准化", "熵权法", "TOPSIS"],
+        "resources": [
+            ("Scikit-Criteria 文档", "https://scikit-criteria.quatrope.org/en/latest/", "参考多准则决策分析的 Python 生态。"),
+            ("Scikit-Criteria 快速开始", "https://github.com/quatrope/scikit-criteria/blob/master/docs/source/tutorial/quickstart.ipynb", "学习决策矩阵、权重和评价器的组织方式。"),
+            ("TOPSIS 概念介绍", "https://en.wikipedia.org/wiki/TOPSIS", "了解理想解和负理想解的基本思想。"),
+        ],
+        "practice": ["把一个指标从正向改成负向，观察排名变化。", "解释熵权较大的指标为什么信息量更高。", "给排名第一和最后一名写对比分析。"],
+        "deliverables": ["entropy_weights.csv", "topsis_ranking.csv", "topsis_ranking.png"],
+        "challenge": "加入一个主观权重方案，与熵权结果做敏感性对比。",
+        "checklist": ["指标方向是否处理正确", "权重是否归一化", "排名解释是否回到题目目标"],
+    },
+    "lesson-08": {
+        "scenario": "预测模型要同时给出未来值和误差证据，本讲比较趋势、滚动均值和 GM(1,1)。",
+        "concepts": ["训练/测试切分", "趋势外推", "滚动基线", "GM(1,1)", "MAPE"],
+        "resources": [
+            ("statsmodels 时间序列模块", "https://www.statsmodels.org/stable/tsa.html", "了解 AR、ARMA、状态空间等时间序列工具。"),
+            ("statsmodels 预测示例", "https://www.statsmodels.org/stable/examples/notebooks/generated/statespace_forecasting.html", "学习伪样本外预测评估思路。"),
+            ("NumPy 随机采样", "https://numpy.org/doc/stable/reference/random/index.html", "理解教学合成数据的随机生成方式。"),
+        ],
+        "practice": ["改变测试集长度并比较 MAPE。", "把趋势模型换成二次趋势。", "解释为什么滚动均值是有用基线。"],
+        "deliverables": ["forecast_metrics.csv", "forecast_comparison.png"],
+        "challenge": "加入一个季节性特征，并说明预测图中的周期性变化。",
+        "checklist": ["是否保留测试集", "是否比较至少两个模型", "是否同时报告曲线和误差指标"],
+    },
+    "lesson-09": {
+        "scenario": "分类模型不只看准确率，还要看正类召回和混淆矩阵是否符合问题风险。",
+        "concepts": ["分类标签", "训练/测试划分", "逻辑回归", "决策树", "混淆矩阵"],
+        "resources": [
+            ("scikit-learn 监督学习指南", "https://scikit-learn.org/stable/supervised_learning.html", "建立分类与回归的整体地图。"),
+            ("LogisticRegression 文档", "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html", "查看逻辑回归参数和适用条件。"),
+            ("DecisionTreeClassifier 文档", "https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html", "理解树模型的深度、分裂准则和过拟合风险。"),
+        ],
+        "practice": ["比较逻辑回归和决策树的 recall。", "解释一个假阴性或假阳性的业务后果。", "调整决策树深度并观察混淆矩阵变化。"],
+        "deliverables": ["classification_metrics.csv", "confusion_matrix.csv", "confusion_matrix.png"],
+        "challenge": "把评价指标从 accuracy 改为 F1 或 recall 优先，并说明原因。",
+        "checklist": ["是否使用训练/测试划分", "是否输出混淆矩阵", "是否根据题目风险选择指标"],
+    },
+    "lesson-10": {
+        "scenario": "资源分配问题要先写清决策变量、目标和约束，再交给求解器。",
+        "concepts": ["决策变量", "目标函数", "不等式约束", "可行域", "最优解"],
+        "resources": [
+            ("SciPy linprog 文档", "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html", "学习线性规划的矩阵输入格式。"),
+            ("HiGHS 求解器", "https://highs.dev/", "了解 SciPy 默认高性能线性优化求解器来源。"),
+            ("Matplotlib subplots 文档", "https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html", "把可行域和最优点画清楚。"),
+        ],
+        "practice": ["把利润系数改成另一组值。", "新增一个资源约束。", "解释最优点为什么落在约束边界上。"],
+        "deliverables": ["lp_solution.csv", "lp_summary.csv", "lp_feasible_region.png"],
+        "challenge": "将二维问题扩展到三种产品，并用表格解释结果而不是画可行域。",
+        "checklist": ["变量、目标、约束是否一一对应", "是否检查 res.success", "最优解解释是否有业务含义"],
+    },
+    "lesson-11": {
+        "scenario": "0-1 规划常用于选址、项目选择和任务分配，本讲用枚举法讲清离散选择的结构。",
+        "concepts": ["0-1 变量", "预算约束", "可行组合", "多目标权衡", "Pareto 思想"],
+        "resources": [
+            ("Python itertools.product", "https://docs.python.org/3/library/itertools.html#itertools.product", "理解枚举所有 0-1 组合的方法。"),
+            ("SciPy MILP 文档", "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.milp.html", "了解更大规模整数规划的求解接口。"),
+            ("SciPy linprog 文档", "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html", "对比连续规划和整数规划的差异。"),
+        ],
+        "practice": ["修改预算上限，观察最优组合变化。", "改变收益和风险权重，观察折中前沿。", "给一个组合写出选择理由。"],
+        "deliverables": ["binary_solutions.csv", "multiobjective_tradeoff.csv", "multiobjective_tradeoff.png"],
+        "challenge": "加入一个互斥约束，例如 P1 和 P3 不能同时选择。",
+        "checklist": ["是否枚举所有可行组合", "预算约束是否生效", "是否说明多目标权衡"],
+    },
+    "lesson-12": {
+        "scenario": "交通、物流和传播题常抽象成网络，本讲训练最短路、最大流和关键节点分析。",
+        "concepts": ["节点和边", "权重", "最短路", "最大流", "中心性"],
+        "resources": [
+            ("NetworkX 算法索引", "https://networkx.org/documentation/stable/reference/algorithms/index.html", "查找图论算法的官方入口。"),
+            ("NetworkX shortest paths", "https://networkx.org/documentation/stable/reference/algorithms/shortest_paths.html", "学习最短路函数和权重参数。"),
+            ("NetworkX centrality", "https://networkx.org/documentation/stable/reference/algorithms/centrality.html", "理解中心性指标适合回答什么问题。"),
+        ],
+        "practice": ["添加一条新边，观察最短路是否变化。", "找出 betweenness 最高的节点并解释风险。", "改变一条容量，观察最大流瓶颈。"],
+        "deliverables": ["node_centrality.csv", "weighted_network.png", "max_flow.csv"],
+        "challenge": "把网络解释成一个真实物流系统，并给出 2 条改造建议。",
+        "checklist": ["节点和边定义是否合理", "权重含义是否清楚", "网络指标是否能转成策略建议"],
+    },
+    "lesson-13": {
+        "scenario": "当需求、成本或风险不确定时，仿真比单点计算更能说明决策风险。",
+        "concepts": ["随机变量", "蒙特卡洛", "置信区间", "库存决策", "风险收益"],
+        "resources": [
+            ("NumPy random 官方指南", "https://numpy.org/doc/stable/reference/random/index.html", "学习使用 Generator 生成随机样本。"),
+            ("NumPy Generator 文档", "https://numpy.org/doc/2.3/reference/random/generator.html", "查看不同分布和 size 参数。"),
+            ("SciPy statistics", "https://docs.scipy.org/doc/scipy/reference/stats.html", "后续可扩展到更多概率分布。"),
+        ],
+        "practice": ["改变需求方差，观察最优订货量变化。", "比较均值收益和 5% 分位收益。", "写出风险厌恶型决策建议。"],
+        "deliverables": ["monte_carlo_inventory.csv", "monte_carlo_inventory.png"],
+        "challenge": "把目标从最大均值收益改成最大 5% 分位收益。",
+        "checklist": ["是否固定随机种子", "模拟次数是否足够", "是否报告区间而不是只报告均值"],
+    },
+    "lesson-14": {
+        "scenario": "模型结论必须经得起参数扰动，本讲训练敏感性分析和鲁棒性表达。",
+        "concepts": ["参数扰动", "敏感性曲线", "解结构稳定性", "鲁棒性说明"],
+        "resources": [
+            ("SciPy linprog 文档", "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html", "复用线性规划模型作为敏感性对象。"),
+            ("scikit-learn 模型评估", "https://scikit-learn.org/stable/modules/model_evaluation.html", "类比理解评价指标与模型检验。"),
+            ("Matplotlib pyplot 教程", "https://matplotlib.org/stable/tutorials/pyplot.html", "将参数变化画成可解释曲线。"),
+        ],
+        "practice": ["选择一个关键参数做 10 个扰动点。", "判断最优决策是否发生跳变。", "写一段鲁棒性结论。"],
+        "deliverables": ["lp_sensitivity.csv", "lp_sensitivity.png", "robustness_statement.csv"],
+        "challenge": "同时扰动两个参数，输出热力图或二维结果表。",
+        "checklist": ["扰动范围是否合理", "是否说明结论稳定区间", "是否把检验结果写进论文语气"],
+    },
+    "lesson-15": {
+        "scenario": "模型写作要把符号、目标函数和约束放进统一表达，本讲训练数学表达骨架。",
+        "concepts": ["符号表", "目标函数", "约束条件", "LaTeX 公式", "模型段落"],
+        "resources": [
+            ("Overleaf 数学表达", "https://www.overleaf.com/learn/latex/Mathematical_expressions", "学习行内公式和展示公式。"),
+            ("Overleaf Learn", "https://www.overleaf.com/learn", "查找表格、图片、数学符号等 LaTeX 主题。"),
+            ("COMAP 官方说明", "https://www.contest.comap.com/undergraduate/contests/mcm/instructions.php", "核对摘要页和论文提交要求。"),
+        ],
+        "practice": ["把线性规划模型写成符号表。", "补齐目标函数和约束公式。", "写一段模型建立文字。"],
+        "deliverables": ["symbol_table.csv", "symbol_table.md", "model_latex_snippet.tex", "model_description.md"],
+        "challenge": "把第 10 讲 LP 模型改写成完整论文小节。",
+        "checklist": ["符号是否先定义后使用", "公式是否有目标和约束", "文字是否解释模型为什么适合问题"],
+    },
+    "lesson-16": {
+        "scenario": "论文结果不能只贴图表，本讲训练图表、指标和结论三者对齐。",
+        "concepts": ["图表叙事", "关键指标", "证据链", "结论句", "局限性"],
+        "resources": [
+            ("COMAP 官方说明", "https://www.contest.comap.com/undergraduate/contests/mcm/instructions.php", "理解摘要和报告质量的重要性。"),
+            ("Matplotlib 示例库", "https://matplotlib.org/stable/gallery/index.html", "参考图表呈现方式。"),
+            ("Jupyter Notebook 文档", "https://jupyter-notebook.readthedocs.io/en/stable/notebook.html", "把图表、代码和文字整合到一个可审阅文件。"),
+        ],
+        "practice": ["为每个结果写一句观察、解释和结论。", "删掉不能支撑结论的指标。", "把一张表改写成论文段落。"],
+        "deliverables": ["result_narrative_table.csv", "figure_table_narrative.md"],
+        "challenge": "选一个前面课程的输出图，写出 200 字结果解释并指出局限。",
+        "checklist": ["是否引用具体指标", "是否说明图表支持什么结论", "是否避免空泛表述"],
+    },
+    "lesson-17": {
+        "scenario": "综合模拟赛要求把读题、评价、优化和图表输出串成一条可复现链路。",
+        "concepts": ["综合评价", "预算约束", "站点选择", "结果表", "初版报告"],
+        "resources": [
+            ("COMAP MCM/ICM 赛事页", "https://www.comap.com/contests/mcm-icm", "理解开放式应用题的综合建模特点。"),
+            ("SciPy linprog 文档", "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html", "对照优化模型的标准表述。"),
+            ("pandas groupby 用户指南", "https://pandas.pydata.org/docs/user_guide/groupby.html", "复用表格汇总和分组分析技能。"),
+        ],
+        "practice": ["读懂站点选择任务的输入输出。", "完成评价分数和预算选择。", "输出一张排名图和一张最终选择表。"],
+        "deliverables": ["site_scores.csv", "selected_sites.csv", "mini_contest_scores.png"],
+        "challenge": "把权重改成三种策略，比较最终选择是否稳定。",
+        "checklist": ["是否形成完整数据到结果链", "是否保存中间表", "是否能把结果交给论文手使用"],
+    },
+    "lesson-18": {
+        "scenario": "最后一讲把模型结果变成报告，并用复盘表改进下一轮比赛表现。",
+        "concepts": ["摘要页", "报告结构", "检查清单", "团队复盘", "改进动作"],
+        "resources": [
+            ("COMAP 官方说明", "https://www.contest.comap.com/undergraduate/contests/mcm/instructions.php", "核对 Summary Sheet、报告格式和提交要求。"),
+            ("COMAP 模板资源入口", "https://modeling-contests.math.ufl.edu/mcm/", "查找 Summary Sheet 和 Solution Report 模板入口。"),
+            ("Overleaf 数学表达", "https://www.overleaf.com/learn/latex/Mathematical_expressions", "整理公式表达，方便报告打磨。"),
+        ],
+        "practice": ["用检查表审阅一份短报告。", "把模型结果放进对应小节。", "写出 3 条赛后改进动作。"],
+        "deliverables": ["paper_checklist.csv", "mini_report.md", "team_review.csv"],
+        "challenge": "用本讲模板复盘你们最近一次训练，明确下一周改什么。",
+        "checklist": ["摘要是否包含方法和关键结果", "结果是否有代码/图表支撑", "复盘动作是否具体可执行"],
+    },
+}
+
+
 def md(text: str):
     return nbf.v4.new_markdown_cell(text.strip())
 
 
 def code(text: str):
     return nbf.v4.new_code_cell(text.strip())
+
+
+def bullet(items: list[str]) -> str:
+    return "\n".join(f"- {item}" for item in items)
+
+
+def references_block(resources: list[tuple[str, str, str]]) -> str:
+    return "\n".join(f"- [{title}]({url})：{note}" for title, url, note in resources)
+
+
+def intro_cells(lesson_id: str) -> list:
+    meta = LESSON_ENRICHMENT[lesson_id]
+    return [
+        md(
+            "## 课件导学\n\n"
+            f"**任务情境**：{meta['scenario']}\n\n"
+            "**关键概念**\n\n"
+            f"{bullet(meta['concepts'])}\n\n"
+            "**本讲产物**\n\n"
+            f"{bullet(meta['deliverables'])}"
+        ),
+        md(
+            "## 资料链接与阅读抓手\n\n"
+            "下面这些链接优先选官方文档或稳定资料。课前先看标题和示例，课堂中遇到参数或概念再回查。\n\n"
+            f"{references_block(meta['resources'])}"
+        ),
+    ]
+
+
+def practice_cells(lesson_id: str) -> list:
+    meta = LESSON_ENRICHMENT[lesson_id]
+    resources = [
+        {"title": title, "url": url, "reading_note": note}
+        for title, url, note in meta["resources"]
+    ]
+    deliverables = meta["deliverables"]
+    checklist = meta["checklist"]
+    return [
+        md(
+            "## 实战环节\n\n"
+            "**课堂任务**\n\n"
+            f"{bullet(meta['practice'])}\n\n"
+            f"**课后挑战**：{meta['challenge']}\n\n"
+            "**验收清单**\n\n"
+            f"{bullet(checklist)}"
+        ),
+        code(
+            "lesson_resources = "
+            + repr(resources)
+            + "\nlesson_deliverables = "
+            + repr(deliverables)
+            + "\nlesson_checklist = "
+            + repr(checklist)
+            + r"""
+
+pd.DataFrame(lesson_resources).to_csv(OUTPUT_ROOT / "lesson_resources.csv", index=False, encoding="utf-8-sig")
+pd.DataFrame({"deliverable": lesson_deliverables}).to_csv(OUTPUT_ROOT / "lesson_deliverables.csv", index=False, encoding="utf-8-sig")
+pd.DataFrame({"check_item": lesson_checklist}).to_csv(OUTPUT_ROOT / "lesson_checklist.csv", index=False, encoding="utf-8-sig")
+print("Saved courseware resource map, deliverables, and checklist.")
+"""
+        ),
+    ]
 
 
 def notebook(title: str, lesson_id: str, objective: str, cells: list):
@@ -58,6 +358,7 @@ def notebook(title: str, lesson_id: str, objective: str, cells: list):
     }
     nb.cells = [
         md(f"# {title}\n\n> {objective}"),
+        *intro_cells(lesson_id),
         md(
             "## 使用说明\n\n"
             "- 先从上到下运行全部单元。\n"
@@ -65,8 +366,10 @@ def notebook(title: str, lesson_id: str, objective: str, cells: list):
             "- 示例数据均为教学用合成数据，真实比赛中应替换为题目附件数据。"
         ),
         code(f'LESSON_ID = "{lesson_id}"\n' + COMMON_SETUP),
+        md("## 可运行示例与讲解路线"),
     ]
     nb.cells.extend(cells)
+    nb.cells.extend(practice_cells(lesson_id))
     return nb
 
 
