@@ -44,6 +44,18 @@ MCM_ICM_CDMS/
     training-plan/
 ```
 
+18 讲扩展后，建议同步建立：
+
+```text
+src/
+  lesson01_competition_workflow/
+  lesson02_data_types/
+  ...
+  lesson18_final_review/
+```
+
+单讲设计索引见：[lessons/README.md](lessons/README.md)。
+
 ## 代码规范
 
 ### 文件命名
@@ -127,4 +139,3 @@ MCM_ICM_CDMS/
 - [ ] 输出目录不存在时能自动创建
 - [ ] 图表和表格能被保存
 - [ ] 关键结论有对应输出文件支撑
-
